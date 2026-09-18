@@ -9,14 +9,8 @@ class ImageGenerationService:
         self.image_storage = image_storage
         self.image_generator = image_generator
     
-    def generate(self,prompt:Prompt)->str:
-        image_generator = self.image_generator.generate(
-            text=prompt.input,
-            width=prompt.width,
-            height=prompt.height,
+    def generate(self,prompt:str)->str:
+        image_byte = self.image_generator.generate(
+            text=prompt
         )
-        return self.image_storage.save(
-            data=image_generator,
-            width=prompt.width,
-            height=prompt.height
-        )
+        return self.image_storage.save(data=image_byte)

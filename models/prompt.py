@@ -10,5 +10,4 @@ class Prompt(BaseModel):
     )
 
     input: str = Field(min_length=1, max_length=10000)
-    width: int = Field(default=1024, ge=256, le=2048)
-    height: int = Field(default=1024, ge=256, le=2048)
+ 

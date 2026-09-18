@@ -9,13 +9,8 @@ class ImageStorage:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True,exist_ok=True)
     
-    def save(self,data:bytes,width:int,height:int)-> str:
+    def save(self,data:bytes)-> str:
         try:
-        # Kiểm tra lại ảnh trả về
-            with Image.open(BytesIO(data)) as image:
-                if image.size != (width,height):
-                    raise ValueError("Kích thước ảnh không đúng yêu cầu")
-                image.verify()
             # Tạo ra ảnh từ kết quả model trả về 
             with Image.open(BytesIO(data)) as image:
                 image.load()
@@ -28,7 +23,6 @@ class ImageStorage:
             ValueError,
             SyntaxError,
         ) as exc:
-            logger.warning("Model_image trả ảnh không hợp lệ.")
 
             raise HTTPException(
                 status_code=502,
