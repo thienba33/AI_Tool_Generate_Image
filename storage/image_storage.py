@@ -23,9 +23,7 @@ class ImageStorage:
             ValueError,
             SyntaxError,
         ) as exc:
-
-            raise HTTPException(
-                status_code=502,
-                detail="Model_image trả ảnh không hợp lệ.",
+            raise RuntimeError(
+                "Model trả ảnh không hợp lệ."
             ) from exc
         return file_path
